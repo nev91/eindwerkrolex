@@ -1,0 +1,62 @@
+@extends('layouts.frontlayout')
+@section('content')
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 p-0">
+                <div align="center" class="embed-responsive embed-responsive-21by9 video">
+                    <video autoplay loop class="videobig embed-responsive-item video_prof_watches" width="110%" src="{{asset('videos/classic_watches.mp4')}}">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="horloge">
+        <div class="row">
+            <div class="col-12 col-lg-10 offset-lg-1 text-center py-lg-3">
+                <div class="horlogeheader mx-auto">
+                    <h1 class="productsh1 my-3">Klassieke horloges</h1>
+                    <p class="productsp mx-auto">De collectie met klassieke Rolex-horloges bestaat uit modellen waarbij Rolex’ knowhow en hoge perfectie-eisen worden gecombineerd op een manier die het erfgoed van horlogevakmanschap in zijn meest tijdloze vorm naar een hoger plan brengt.</p>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        @if($watches)
+                            <?php $i=1; ?>
+                            @foreach($watches as $watch)
+                                <?php if($i%2==0){ ?>
+                                <div class="row">
+                                    <div class="col-lg-6 order-lg-1">
+                                        <div class="productskader py-lg-3">
+                                            <a href="{{route('product', $watch->id)}}"><img class="img-fluid" src="{{$watch->photo ? asset($watch->photo->file) : 'http://placehold.it/1050x825'}}" alt="{{$watch->name}}"></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 m-lg-auto order-lg-0">
+                                        <div class="pb-5">
+                                            <h3 class="productsh3">{{$watch->name}}</h3>
+                                            <cite>"{{$watch->slogan}}"</cite>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php $i++;}
+                                elseif($i%2!=0) {?>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="productskader py-lg-3">
+                                            <a href="{{route('product', $watch->id)}}"><img class="img-fluid" src="{{$watch->photo ? asset($watch->photo->file) : 'http://placehold.it/1050x825'}}" alt="{{$watch->name}}"></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 m-lg-auto">
+                                        <div class="pb-5">
+                                            <h3 class="productsh3">{{$watch->name}}</h3>
+                                            <cite>"{{$watch->slogan}}"</cite>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php $i++; } ?>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
